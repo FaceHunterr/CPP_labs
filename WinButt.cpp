@@ -6,7 +6,6 @@ Window::Window(const string& name, const COLOR& col, Window* prevWin, Button* ac
 {
   WinName = name;
   color = col;
-  prevWindow = prevWin;
   activationButton = actBut;
 }
 
@@ -14,7 +13,6 @@ Window::Window(const Window& win)
 {
   WinName = win.WinName;
   color = win.color;
-  prevWindow = win.prevWindow;
   activationButton = win.activationButton;
 }
 
@@ -51,11 +49,17 @@ Button* Window::getLastButton()
   return &Buttons.back();
 }
 
+Button* Window::getFirstButton()
+{
+  return &Buttons.front();
+}
+
 void Window::addSubWindow(const Window& win)
 {
   Windows.push_back(win);
   Windows.back().activationButton->SetActivatedWindow(&(Windows.back()));
   Windows.back().AddBackButton();
+  Windows.back().getFirstButton()->SetActivatedWindow(this);
 }
 
 Window* Window::PressButton(POSITION mousePos)
@@ -77,7 +81,6 @@ void Window::AddBackButton()
   POSITION ButtPosition = { size.width * 9 / 10, 0 };
   SIZE ButtSize = { int(size.width * 0.1), int(size.height * 0.1) };
   Buttons.push_back(Button("Back", ButtColor, ButtPosition, ButtSize));
-  Buttons.back().SetActivatedWindow(prevWindow);
 
 }
 

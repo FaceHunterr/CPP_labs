@@ -37,7 +37,7 @@ void MenuCreating(ifstream& inputFile)
     }
     else if (ToLower(words[0]) == "end_window")
     {
-      CurWin = CurWin->getPrevWindow();
+      CurWin = CurWin->getFirstButton()->getWindow();
     }
     else
     {

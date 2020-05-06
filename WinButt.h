@@ -17,7 +17,6 @@ class Window
   COLOR color;
   list<Button> Buttons; //список кнопок, отображаемых в окне
   list<Window> Windows; //список окон, к которым можно перейти через это окно
-  Window* prevWindow; //предыдущее окно, на которое можно перейти по кнопке back
   Button* activationButton; //кнопка, принадлежащая предыдущему окну, по которой можно перейти к этому окну
 public:
   explicit Window(const string& name, const COLOR& col, Window* prevWin, Button* actBut);
@@ -26,8 +25,8 @@ public:
   void setPosition(const POSITION& pos) { position = pos; };
   string getWinName() const { return WinName; };
   COLOR getColor(void) const { return color; };
-  Window* getPrevWindow(void) const { return prevWindow; };
   Button* getLastButton(void);
+  Button* getFirstButton(void);
   Window* getLastSubWindow(void) { return &Windows.back(); };
   Window* PressButton(POSITION mousePos); //переходит к окну, активируемому кнопкой, которую выделили мышью 
   void AddBackButton(); //добавляет кнопку возврата назад (back)
