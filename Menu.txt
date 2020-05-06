@@ -5,75 +5,88 @@ size 1000 650
 color 255 215 58
 	
 	Add_button:
-	name Violet Button
-	position 50 100
-	size 200 70
+	name First SubMenu
+	position 100 100
+	size 200 75
 	color 238 130 238
 
 	Add_window:
-	color 255 228 181
-	name Moccasin Window
+	color 238 130 238
+	name First SubMenu
+	
 
 		Add_button:
-		name Purple b u t t o n
-		position 273 50
-		size 300 220
-		color 128 0 128
-
-		add_BUtton:
-		name Chocolate_but
-		position 800 600
-		color 210 105 30
-		size 200 50
+		name First submenu button
+		position 100 100
+		size 200 75
+		color 255 255 0
 
 		Add_window:
-		color 0 0 0
-		name Black window
+		color 0 130 0
+		name blank window
+		end_window
+
+		Add_button:
+		name Second submenu button
+		position 600 100
+		size 200 75
+		color 0 255 255
+
+		Add_window:
+		color 130 0 0
+		name blank window
 		end_window
 
 	end_window
 
 	Add_button:
-	name brownbutton
-	position 600 200
-	size 50 100
-	color 165 42 42
+	name Second SubMenu
+	position 600 100
+	size 200 75
+	color 183 113 42
+
+	Add_window:
+	color 183 113 42
+	name Second SubMenu
+
+		Add_button:
+		name Open new window
+		position 100 100
+		size 200 75
+		color 0 255 255
+
+		Add_window:
+		color 150 150 230
+		name New Window
+		end_window
+
+	end_window
+
+	Add_button:
+	name Third SubMenu
+	position 100 300
+	size 200 75
+	color 138 130 238
+
+	Add_window:
+	color 138 130 238
+	name Third SubMenu
+
+		Add_button:
+		name UselesButton
+		position 100 300
+		size 200 75
+		color 130 130 130
+
+	end_window
+
+	Add_button:
+	name Fourth SubMenu
+	position 600 300
+	size 200 75
+	color 255 69 0
 
 	Add_window:
 	color 255 228 181
-	name Moccasin Window
-
-		Add_button:
-		name Purple b u t t o n
-		position 110 110
-		size 110 100
-		color 128 0 128
-
-		add_BUtton:
-		name Chocolate_but
-		position 500 120s
-		color 210 105 30
-		size 200 50
-
+	name Fourth SubMenu
 	end_window
-
-	Add_button:
-	name Deep Pink button
-	position 300 400
-	size 600 30
-	color 255 20 147
-
-	Add_window:
-	color 255 255 255
-	name White window
-	end_window
-
-	Add_button:
-	name OrangeRed
-	position 0 0
-	size 100 100
-	color 255 69 0
-
-
-
-	
