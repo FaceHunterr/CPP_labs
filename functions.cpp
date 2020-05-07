@@ -91,8 +91,8 @@ void MainWinInit(ifstream& inputFile)
     words.clear();
     readedLine.clear();
   }
-  
-  CurWin = MainWin = new Window(WinName, color, nullptr, nullptr);
+
+  CurWin = MainWin = new Window(WinName, color);
   MainWin->setPosition(position);
   MainWin->setSize(size);
   glutInitWindowPosition(position.x, position.y);
@@ -147,7 +147,7 @@ void addButton(ifstream& inputFile)
     words.clear();
     readedLine.clear();
   }
-  CurWin->addButton(Button(BottonName, color, position, size));
+  CurWin->addButton(Button(BottonName, color, position, size, nullptr));
 
 }
 
@@ -181,7 +181,7 @@ void addSubWindow(ifstream& inputFile)
     words.clear();
     readedLine.clear();
   }
-  CurWin->addSubWindow(Window(WinName, color, CurWin, CurWin->getLastButton()));
+  CurWin->addSubWindow(SubWindow(Window(WinName, color), CurWin));
   CurWin = CurWin->getLastSubWindow();
 
 }

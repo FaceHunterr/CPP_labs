@@ -2,18 +2,26 @@
 #include <iostream>
 #define FONT GLUT_BITMAP_HELVETICA_18
 
-Window::Window(const string& name, const COLOR& col, Window* prevWin, Button* actBut)
+Window::Window(const string& name, const COLOR& col)
 {
   WinName = name;
   color = col;
-  activationButton = actBut;
 }
 
 Window::Window(const Window& win)
 {
   WinName = win.WinName;
   color = win.color;
-  activationButton = win.activationButton;
+  for (auto b : win.Buttons)
+    Buttons.push_back(b);
+}
+
+Window::Window(const SubWindow& win)
+{
+  WinName = win.WinName;
+  color = win.color;
+  for (auto b : win.Buttons)
+    Buttons.push_back(b);
 }
 
 void Window::Clear() const
@@ -54,12 +62,10 @@ Button* Window::getFirstButton()
   return &Buttons.front();
 }
 
-void Window::addSubWindow(const Window& win)
+void Window::addSubWindow(const SubWindow& win)
 {
   Windows.push_back(win);
-  Windows.back().activationButton->SetActivatedWindow(&(Windows.back()));
-  Windows.back().AddBackButton();
-  Windows.back().getFirstButton()->SetActivatedWindow(this);
+  getLastButton()->SetActivatedWindow(getLastSubWindow());
 }
 
 Window* Window::PressButton(POSITION mousePos)
@@ -72,28 +78,30 @@ Window* Window::PressButton(POSITION mousePos)
   return this;
 }
 
-void Window::AddBackButton()
-{
-  COLOR ButtColor;
-  ButtColor.blue = (color.blue >= 0.5) ? color.blue - 0.5 : color.blue + 0.5;
-  ButtColor.green = (color.green >= 0.5) ? color.green - 0.5 : color.green + 0.5;
-  ButtColor.red = (color.red >= 0.5) ? color.red - 0.5 : color.red + 0.5;
-  POSITION ButtPosition = { size.width * 9 / 10, 0 };
-  SIZE ButtSize = { int(size.width * 0.1), int(size.height * 0.1) };
-  Buttons.push_back(Button("Back", ButtColor, ButtPosition, ButtSize));
-
-}
-
 
 //////////////////
 
-Button::Button(string name, COLOR col, POSITION pos, SIZE s)
+SubWindow::SubWindow(const Window& win, Window* prevWin) :
+  Window(win)
+{
+  COLOR ButtColor = getColor();
+  ButtColor.blue = (ButtColor.blue >= 0.5) ? ButtColor.blue - 0.5 : ButtColor.blue + 0.5;
+  ButtColor.green = (ButtColor.green >= 0.5) ? ButtColor.green - 0.5 : ButtColor.green + 0.5;
+  ButtColor.red = (ButtColor.red >= 0.5) ? ButtColor.red - 0.5 : ButtColor.red + 0.5;
+  POSITION ButtPosition = { getSize().width * 9 / 10, 0 };
+  SIZE ButtSize = { int(getSize().width * 0.1), int(getSize().height * 0.1) };
+  addButton(Button("Back", ButtColor, ButtPosition, ButtSize, prevWin));
+}
+
+//////////////////
+
+Button::Button(string name, COLOR col, POSITION pos, SIZE s, Window* win)
 {
   ButtonName = name;
   color = col;
   position = pos;
   size = s;
-  activatedWindow = nullptr;
+  activatedWindow = win;
 }
 
 void Button::Draw()
